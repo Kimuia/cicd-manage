@@ -1,22 +1,17 @@
 # Mini Jenkins
 
-포트폴리오용 미니 CI/CD 관리 시스템.
-
-Git Clone → Docker Build → SCP 전송 → Container 배포까지의 파이프라인을 자체 구현한 프로젝트입니다.
+Git Clone → Docker Build → SCP 전송 → Container 배포까지의 파이프라인을 자체 구현한 미니 CI/CD 시스템입니다.
 
 ## 아키텍처
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  orchestration   │────▶│  build-server    │     │  deploy-server   │
-│  (Next.js)       │     │  (Node.js)       │     │  (Node.js)       │
-│  :3000           │     │  :4001           │     │  :4002           │
-│                  │────▶│                  │────▶│                  │
-│  - UI 대시보드   │ SSE │  - Git Clone     │ SCP │  - Docker Load   │
-│  - REST API      │◀────│  - Docker Build  │────▶│  - Docker Run    │
-│  - SQLite DB     │     │  - Docker Save   │     │  - 로그 스트리밍 │
-│  - 작업 조율     │     │  - SCP 전송      │     │  - 헬스체크      │
-└─────────────────┘     └──────────────────┘     └──────────────────┘
+orchestration (:3000)  ──▶  build-server (:4001)  ──▶  deploy-server (:4002)
+Next.js                     Node.js                    Node.js
+
+UI 대시보드                 Git Clone                  Docker Load
+REST API            ◀──    Docker Build         ──▶   Docker Run
+SQLite DB           SSE    Docker Save          SCP   로그 스트리밍
+작업 조율                   SCP 전송                    헬스체크
 ```
 
 ## 서버 구성
