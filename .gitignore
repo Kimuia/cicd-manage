@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+*/node_modules
 /.pnp
 .pnp.js
 
@@ -9,8 +9,8 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/out
+.next
 
 # production
 /build
@@ -34,3 +34,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude
+.claude
+
+# orchestration db
+orchestration/data/*.db
+orchestration/data/*.db-wal
+orchestration/data/*.db-shm
+
+# docs (local only)
+docs/
+CLAUDE.md
